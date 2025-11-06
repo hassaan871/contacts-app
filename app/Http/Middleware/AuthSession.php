@@ -15,6 +15,9 @@ class AuthSession
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!$request->session()->has('user')) {
+            return redirect('/login');
+        }
         return $next($request);
     }
 }
