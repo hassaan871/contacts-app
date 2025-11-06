@@ -2,7 +2,7 @@
     <h1>Contacts List</h1>
 
     <form action="/search" method="get">
-        <input type="text" placeholder="Search contact with Name" name="search" value="{{@$search}}">
+        <input type="text" placeholder="Search Contact with Name" name="search" value="{{@$search}}">
         <button>Search</button>
     </form>
 
@@ -45,6 +45,7 @@
     </div>
     @endif
 
+    <h4>Create New Contact</h4>
     <form action="contacts" method="post">
         @csrf
         <input type="text" placeholder="New Contact Name" name="name" required>
@@ -52,7 +53,7 @@
         <input type="text" placeholder="New Contact Phone" name="phone" required>
         <button type="submit">Create New Contact</button>
     </form>
-
+  
     <a href="/logout">
         <button>Logout</button>
     </a>
