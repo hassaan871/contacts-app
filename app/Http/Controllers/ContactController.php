@@ -16,7 +16,6 @@ class ContactController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-
         ]);
 
         return redirect('/contacts')->with('success', 'Contact Added successfully');

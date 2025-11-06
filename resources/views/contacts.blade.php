@@ -1,5 +1,11 @@
+<x-navbar />
 <div>
     <h1>Contacts List</h1>
+    @if(session('info'))
+        <div style="border: 3px solid yellow;">
+            {{ session('info') }}
+        </div>
+    @endif
 
     <form action="/search" method="get">
         <input type="text" placeholder="Search Contact with Name" name="search" value="{{@$search}}">

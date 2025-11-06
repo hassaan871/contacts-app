@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AuthSession;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewUserController;
-use App\Http\Middleware\AuthSession;
+use App\Http\Controllers\GroupController;
 
 Route::get('/', function () {
     return view('login');
@@ -46,4 +47,6 @@ Route::middleware([AuthSession::class])->group(function () {
     // New user feature
     Route::get('/users', [NewUserController::class, 'getGroupUsers']);
     Route::post('/users', [NewUserController::class, 'create']);
+
+    Route::get('/groups', [GroupController::class, 'getGroups']);
 });
