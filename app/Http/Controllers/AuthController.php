@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function Login(Request $request)
     {
 
-        $user = User::where('name', $request->username)->first();
+        $user = User::with('role')->where('name', $request->username)->first();
 
         if (!$user) {
             return redirect()->back()->with('error-username', 'Invalid Username')->withInput();

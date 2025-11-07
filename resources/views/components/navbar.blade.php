@@ -1,13 +1,16 @@
 <nav>
     <ul>
         <li>
+            Welcome, {{ session('user')->name }}
+        </li>
+        <li>
+            <a href="/home">Home</a>
+        </li>
+        <li>
             <a href="/contacts">Contacts</a>
         </li>
         <li>
             <a href="/users">Users</a>
-        </li>
-        <li>
-            <a href="/groups">Groups</a>
         </li>
         <li>
             <a href="/logout">
@@ -39,6 +42,6 @@
         font-size: 25px;
         margin: 20px;
         padding: 25px;
-        color: #A6D6D6;
+        color: #023E8A;
     }
 </style>

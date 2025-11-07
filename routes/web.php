@@ -13,12 +13,14 @@ Route::get('/', function () {
 
 // Basic Auth Views
 Route::get('/signup', function () {
+    session()->forget('user');
     return view('signup');
 });
 Route::get('/login', function () {
+    session()->forget('user');
     return view('login');
 });
-Route::get('/logout', function() {
+Route::get('/logout', function () {
     session()->forget('user');
     return redirect('/login');
 });
@@ -30,6 +32,11 @@ Route::post('/login', [AuthController::class, 'Login']);
 // Routes that require Authentication 
 Route::middleware([AuthSession::class])->group(function () {
 
+    // Home view 
+    Route::get('/home', function () {
+        return view('home');
+    });
+    
     // Contacts view 
     Route::get('/contacts', [ContactController::class, 'contactsList']);
 

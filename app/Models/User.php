@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Contact;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -29,6 +30,19 @@ class User extends Authenticatable
         return $this->hasMany(Contact::class);
     }
 
+    public function parentUser()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function childUsers()
+    {
+        return $this->hasMany(User::class, 'created_by');
+    }
+    public function role() 
+    {
+        return $this->belongsTo(Role::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

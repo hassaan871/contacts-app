@@ -25,6 +25,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #023E8A, #2a7ca8ff);
     }
 
     .signup-container {
@@ -35,7 +38,7 @@
         height: 60vh;
         text-align: center;
         justify-content: center;
-        box-shadow: 0 0 8px rgba(166, 214, 214, 0.5);
+        box-shadow: 0 0 8px rgba(228, 229, 231, 0.5);
     }
 
     .form-input {
@@ -50,8 +53,8 @@
     }
 
     .form-input:focus {
-        border: 1px solid #A6D6D6;
-        box-shadow: 0 0 8px rgba(166, 214, 214, 0.5);
+        border: 1px solid #023E8A;
+        box-shadow: 0 0 8px rgba(2, 62, 138, 0.5);
     }
 
     .signup-button {
@@ -59,7 +62,8 @@
         height: 5vh;
         border-radius: 26px;
         border: none;
-        background-color: #A6D6D6;
+        color: white;
+        background-color: #023E8A;
         cursor: pointer;
         font-weight: bold;
         font-size: 16px;
