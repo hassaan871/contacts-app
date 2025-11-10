@@ -9,9 +9,11 @@
         <li>
             <a href="/contacts">Contacts</a>
         </li>
+        @if(session('user')->role->name === 'Admin')
         <li>
             <a href="/users">Users</a>
         </li>
+        @endif
         <li>
             <a href="/logout">
                 Logout

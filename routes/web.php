@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSession;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\NewUserController;
-use App\Http\Controllers\GroupController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\CheckPermission;
 
 Route::get('/', function () {
     return view('login');
@@ -38,22 +39,26 @@ Route::middleware([AuthSession::class])->group(function () {
     });
     
     // Contacts view 
-    Route::get('/contacts', [ContactController::class, 'contactsList']);
+    Route::get('/contacts', [ContactController::class, 'contactsList'])->middleware([CheckPermission::class . ':read_contact']);
 
     // Contacts CRUD
-    Route::post('/contacts', [ContactController::class, 'createNewContact']);
-    Route::delete('/contacts/{id}', [ContactController::class, 'deleteContact']);
+    Route::post('/contacts', [ContactController::class, 'createNewContact'])->middleware([CheckPermission::class . ':create_contact']);
+    Route::delete('/contacts/{id}', [ContactController::class, 'deleteContact'])->middleware([CheckPermission::class . ':delete_contact']);
 
     // Showing the edit contact form 
-    Route::get('/contacts/{id}', [ContactController::class, 'editContactForm']);
-    Route::put('/contacts/{id}', [ContactController::class, 'editContact']);
+    Route::get('/contacts/{id}', [ContactController::class, 'editContactForm'])->middleware([CheckPermission::class . ':read_contact']);
+    Route::put('/contacts/{id}', [ContactController::class, 'editContact'])->middleware([CheckPermission::class . ':update_contact']);
     
     // Search bar
-    Route::get('/search', [ContactController::class, 'search']);
+    Route::get('/search', [ContactController::class, 'search'])->middleware([CheckPermission::class . ':read_contact']);
 
-    // New user feature
-    Route::get('/users', [NewUserController::class, 'getGroupUsers']);
-    Route::post('/users', [NewUserController::class, 'create']);
-
-    Route::get('/groups', [GroupController::class, 'getGroups']);
+    // Admin Routes 
+    Route::middleware([IsAdmin::class])->group(function () {
+        Route::get('/users', [UserController::class, 'getUsers']);
+        Route::put('/permission', [UserController::class, 'updateContactsPermission']);
+        Route::post('/users', [UserController::class, 'create']);
+        Route::delete('/users/{id}', [UserController::class, 'deleteUser']);
+        Route::get('/users/{id}', [UserController::class, 'editUserForm']);
+        Route::put('/users/{id}', [UserController::class, 'editUser']);
+    });
 });
