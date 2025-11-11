@@ -1,3 +1,4 @@
+<x-navbar/>
 <div>
     <h1>Edit User Form</h1>
 

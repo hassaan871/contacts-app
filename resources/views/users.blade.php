@@ -8,35 +8,40 @@
       </form>
 
       <table border="1">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <!-- <th>Password</th> -->
-                <th>Is Admin</th>
-                <th>Update</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <!-- <td>{{ $user->password }}</td> -->
-                    <td>{{ $user->role_id == 1 ? 'yes' : 'no'}}</td>
-                    <td>
-                        <form action="{{'users/'.$user->id}}" method="POST">
-                            @csrf 
-                            @method('DELETE')                            
-                            <button type="submit">Delete</button>
-                        </form>
-                        <a href="{{'users/'.$user->id}}">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <!-- <th>Password</th> -->
+                  <th>Is Admin</th>
+                  <th>Update</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach ($users as $user)
+              <tr>
+                  <td>{{ $user->id }}</td>
+                  <td>{{ $user->name }}</td>
+                  <td>{{ $user->email }}</td>
+                  <!-- <td>{{ $user->password }}</td> -->
+                  <td>{{ $user->role_id == 1 ? 'yes' : 'no'}}</td>
+                  <td>
+                      <form action="{{'users/'.$user->id}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit">Delete</button>
+                      </form>
+                      <!-- <a href="{{'users/'.$user->id}}">Edit</a> -->
+                      <form action="{{'users/'.$user->id}}" method="get">
+                        @csrf 
+                        <button type="submit">Edit</button>
+                      </form>
+                      </button>
+                  </td>
+              </tr>
+              @endforeach
+          </tbody>
       </table>
       <br>
       <br>
@@ -51,7 +56,7 @@
           <label>
               <input type="checkbox" name="isAdmin">
               Is Admin
-          </label>  
+          </label>
           <br>
           <button type="submit">Create New User</button>
       </form>
@@ -80,36 +85,36 @@
 
       <h3>Update Users permissions</h3>
       <form action="/permission" method="post">
-        @csrf
-        @method('PUT')
-        <label>
-            <input type="checkbox" name="permissions[]" value="create_contact"
-            {{ $permissions->contains('name', 'create_contact') ? 'checked' : '' }}>
-            Can Create Contacts
-        </label>
-        <br>
-          
-        <label>
-            <input type="checkbox" name="permissions[]" value="read_contact"
-            {{ $permissions->contains('name', 'read_contact') ? 'checked' : '' }}>
-            Can Read Contacts
-        </label>
-        <br>
-          
-        <label>
-            <input type="checkbox" name="permissions[]" value="update_contact"
-            {{ $permissions->contains('name', 'update_contact') ? 'checked' : '' }}>
-            Can Update Contacts
-        </label>
-        <br>
-          
-        <label>
-            <input type="checkbox" name="permissions[]" value="delete_contact"
-            {{ $permissions->contains('name', 'delete_contact') ? 'checked' : '' }}>
-            Can Delete Contacts
-        </label>
-        <br>
+          @csrf
+          @method('PUT')
+          <label>
+              <input type="checkbox" name="permissions[]" value="create_contact"
+                  {{ $permissions->contains('name', 'create_contact') ? 'checked' : '' }}>
+              Can Create Contacts
+          </label>
+          <br>
+
+          <label>
+              <input type="checkbox" name="permissions[]" value="read_contact"
+                  {{ $permissions->contains('name', 'read_contact') ? 'checked' : '' }}>
+              Can Read Contacts
+          </label>
+          <br>
+
+          <label>
+              <input type="checkbox" name="permissions[]" value="update_contact"
+                  {{ $permissions->contains('name', 'update_contact') ? 'checked' : '' }}>
+              Can Update Contacts
+          </label>
+          <br>
+
+          <label>
+              <input type="checkbox" name="permissions[]" value="delete_contact"
+                  {{ $permissions->contains('name', 'delete_contact') ? 'checked' : '' }}>
+              Can Delete Contacts
+          </label>
+          <br>
 
           <button type="submit">Update</button>
-    </form>
+      </form>
   </div>

@@ -1,3 +1,4 @@
+<x-navbar/>
 <div>
     <h1>Update Contact</h1>
 
